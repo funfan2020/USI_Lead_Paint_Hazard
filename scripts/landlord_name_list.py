@@ -4,8 +4,10 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
+import urllib
 
-data = pd.read_csv(r'.\data\Housing_Maintenance_Code_Violations.csv',low_memory=False)
+urllib.request.urlretrieve ("https://data.cityofnewyork.us/resource/wvxf-dwi5.csv", "Housing_Maintenance_Code_Violations.csv")
+data = pd.read_csv('Housing_Maintenance_Code_Violations.csv',low_memory=False)
 data = data.drop_duplicates()
 
 data618 = data.loc[(data['OrderNumber'] == '618')]
@@ -24,7 +26,8 @@ data_id = data_id.merge(data2016[['RegistrationID', 'BBL']], on='RegistrationID'
 BBLlist = list(data2016['BBL'].unique())
 regID = list(data2016['RegistrationID'].unique())
 
-reg_raw = pd.read_csv(r'.\data\Registration_Contacts.csv', low_memory=False)
+urllib.request.urlretrieve ("https://data.cityofnewyork.us/resource/tesw-yqqr.csv", "Registration_Contacts.csv")
+reg_raw = pd.read_csv('Registration_Contacts.csv', low_memory=False)
 reg = reg_raw.loc[reg_raw['RegistrationID'].isin(regID)]
 reg['Name'] = reg.apply(lambda x: x[['FirstName','MiddleInitial','LastName']].str.cat(sep=' '), axis=1)
 reg['Address'] = reg.apply(lambda x: x[['BusinessZip', 'BusinessStreetName', 'BusinessHouseNumber', 'BusinessApartment']].str.cat(sep=','), axis=1)
@@ -51,7 +54,8 @@ owner_corp_names = owner_names.merge(company_names, on='RegistrationID', how='le
 owner_corp_names = owner_corp_names.merge(data_id, on='RegistrationID', how='left')
 owner_corp_names = owner_corp_names.merge(address, on='RegistrationID', how='left')
 
-pluto = pd.read_csv(r'.\data\Primary_Land_Use_Tax_Lot_Output__PLUTO_.csv',low_memory=False)
+urllib.request.urlretrieve ("https://data.cityofnewyork.us/resource/64uk-42ks.csv", "Primary_Land_Use_Tax_Lot_Output__PLUTO_.csv")
+pluto = pd.read_csv('Primary_Land_Use_Tax_Lot_Output__PLUTO_.csv',low_memory=False)
 pluto = pluto[pluto['yearbuilt']<=1960]
 
 data_with_name = owner_corp_names.merge(pluto[['bbl', 'ownername','numbldgs','unitsres','yearbuilt']], left_on='BBL', right_on='bbl')
