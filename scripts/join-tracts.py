@@ -23,8 +23,16 @@ tracts['no_violation_complaints_per_unit'] = tracts.no_violation_complaints / tr
 tracts['violation_complaints_per_unit'] = tracts.violation_complaints / tracts.units
 tracts['violation_problems_per_unit'] = tracts.violation_problems / tracts.units
 tracts['no_entry_problems_per_unit'] = tracts.no_entry_problems / tracts.units
-tracts['no_violation_problems_per_unit'] = tracts.no_violation_problems / tracts.units 
-
+tracts['no_violation_problems_per_unit'] = tracts.no_violation_problems / tracts.units
+lot_count = pd.DataFrame(lots.borotract.value_counts().reset_index())
+lot_count.columns = ['borotract','lots']
+all_lot_count = pd.DataFrame(all_lots.borotract.value_counts().reset_index())
+all_lot_count.columns = ['borotract','all_lots']
+tracts = tracts.merge(lot_count, how='left', on="borotract")
+tracts = tracts.merge(all_lot_count, how='left', on="borotract")
+tracts['percent_lot_pre_1960'] = tracts.lots / tracts.all_lots * 100
+tracts['pre_1960_units_per_lot'] = tracts.units / tracts.lots
+tracts['all_units_per_lot'] = tracts.all_units / tracts.all_lots
 tracts['percent_pre_1960'] = tracts.units / tracts.all_units * 100
 tracts['persons_per_unit'] = tracts.population / tracts.all_units
 median_age = lots.groupby(['borotract'])['built'].median().reset_index().rename(columns={'built':'median_age'})
