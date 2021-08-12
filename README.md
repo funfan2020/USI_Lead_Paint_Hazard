@@ -8,5 +8,5 @@ This project contains various jupyter notebooks and python scripts intended to c
 2. What landlords are responsible for the highest rates of violations
 3. What effect has the COVID-19 pandemic had on violation inspection and remediation times.
 
-The python scripts found in the `scripts` folder are meant to build the datasets described by the files in the `DataDictionaries` folder from scratch. After installing the python dependencies documented in `requirements.txt`, you can run these scripts in the correct order by simply running the bash script in `build.sh`.
+The python scripts found in the `scripts` folder are meant to build the datasets described by the files in the `DataDictionaries` folder from scratch. After installing the python dependencies documented in `requirements.txt`, you can run these scripts in the correct order by simply running the bash script in `build.sh`. The output data will all be saved to the `data` folder. Note that running the build script deletes the contents of that folder before each build.
 
