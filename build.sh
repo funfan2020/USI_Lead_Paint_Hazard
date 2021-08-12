@@ -17,5 +17,7 @@ echo 'Joining lot level dataset...'
 python ./scripts/join-lots.py
 echo 'Joining tract level dataset...'
 python ./scripts/join-tracts.py
-echo 'Joining complaint level dataset...'
-python ./scripts/join-complaints.py
+echo 'Joining complaint and violation datasets...'
+python ./scripts/join-complaints-violations.py
+echo 'Geocode census tract dataset...'
+python ./scripts/geocode.py

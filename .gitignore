@@ -2,6 +2,6 @@
 .venv
 data/*
 .env
-.venv/**
-venv/**
+.venv
+venv
 __pycache__/**
