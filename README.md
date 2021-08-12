@@ -1,4 +1,4 @@
-# Predicting and Prevent Lead Paint Hazards in NYC
+# Predicting and Preventing Lead Paint Hazards in NYC
 
 This repo contains the project files for an NYU CUSP 2021 Capstone project done in partnership with the Office of the NY State Attorney General
 
